@@ -15,17 +15,6 @@ const client = new MongoClient(url);
 // Database Name
 const dbName = "TodoApp";
 
-/**
- * Connects to the MongoDB Atlas server and returns the 'todos' collection.
- *
- * @async
- * @function ConnectMongo
- * @returns {Promise<Collection>} - The 'todos' collection from the MongoDB Atlas server.
- * @throws {Error} - If there is an error during the connection or collection retrieval.
- *
- * @example
- * const collection = await ConnectMongo();
- */
 async function ConnectMongo() {
   try {
     await client.connect();
@@ -48,16 +37,7 @@ app.get("/app", function (req, res) {
   res.send("Hello World");
 });
 
-app.post("/todo", /**
- * Handles POST request to create a new todo item in the MongoDB collection.
- *
- * @param {Object} req - The request object containing the todo item data.
- * @param {Object} res - The response object to send back the result.
- * @param {Object} req.body - The todo item data to be inserted.
- * @returns {Object} - The result of the insert operation.
- * @throws {Error} - If there is an error during the insert operation.
- */
-async (req, res) => {
+app.post("/todo", async (req, res) => {
   try {
     const insertResult = await collection.insertOne(req.body);
     console.log(insertResult);
@@ -68,21 +48,7 @@ async (req, res) => {
   }
 });
 
-app.get("/todos", /**
- * Handles GET request to retrieve all todo items from the MongoDB collection.
- *
- * @async
- * @function getTodos
- * @param {Object} req - The request object.
- * @param {Object} res - The response object to send back the result.
- * @returns {void}
- *
- * @throws {Error} - If there is an error during the find operation.
- *
- * @example
- * app.get('/todos', getTodos);
- */
-async (req, res) => {
+app.get("/todos", async (req, res) => {
   try {
     const findResult = await collection.find({}).toArray();
     console.log(findResult);
